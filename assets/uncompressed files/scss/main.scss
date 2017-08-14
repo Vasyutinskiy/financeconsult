@@ -1,0 +1,552 @@
+@import "variables";
+@import "mixins";
+@import "normalize";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+@font-face {
+  font-family: 'finance_font';
+  src: url('../fonts/finance_font.eot?fw40fg');
+  src: url('../fonts/finance_font.eot?fw40fg#iefix') format("embedded-opentype"), url('../fonts/finance_font.ttf?fw40fg') format("truetype"), url('../fonts/finance_font.woff?fw40fg') format("woff"), url('../fonts/finance_font.svg?fw40fg#finance_font') format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'finance_font' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: $advantage-icons-font-size;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @media (max-width: 481px) {
+    font-size: 50px;
+  }
+}
+.icon-icon_list:before {
+  content: "\e900";
+  color: #005794;
+}
+.icon-icon_info:before {
+  content: "\e901";
+  color: #005794;
+}
+.icon-icon_rate:before {
+  content: "\e902";
+  color: #005794;
+}
+.icon-icon_clock:before {
+  content: "\e903";
+  color: #005794;
+}
+.icon-icon_finance:before {
+  content: "\e904";
+  color: #005794;
+}
+//common styles
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+div, img, a, section, asside, header, main {
+  display: block;
+}
+h2, h3 {
+  font-size: 1.8em;
+}
+main {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  max-width: $main_container-max-width;
+  margin: auto;
+}
+//navbar styles
+a { text-decoration: none;
+  @include hoverTransition;
+  &:hover {
+    text-decoration: none;
+  }
+}
+.area {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.navbar-component {
+  background-color: $main_plain_white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+  .navbar {
+    justify-content: space-between;
+    @media (max-width: $navbar-collapse-breakpoint) {
+      justify-content: flex-end;
+    }
+  }
+}
+.navbar {
+  .brand {
+    margin: round(($navbar-height - 20) / 2);
+  }
+  & > .toggle {
+    border: 0;
+    background-color: $main_transparent;
+    outline: none;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
+    padding: round(($navbar-height - 20) / 2);
+    @media (min-width: $navbar-collapse-breakpoint) {
+      display: none;
+    }
+  }
+  & > .toggle > .icon {
+    position: relative;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    &,
+    &:before,
+    &:after {
+      display: block;
+      width: 24px;
+      height: 3px;
+      transition: background-color 0.3s linear, transform 0.3s linear;
+      background-color: $navbar-item-color;
+    }
+    &:before, &:after {
+      position: absolute;
+      content: "";
+    }
+    &:before {
+      top: -8px;
+    }
+    &:after {
+      top: 8px;
+    }
+  }
+  & > .toggle.-active > .icon {
+    background-color: $main_transparent;
+    &:before {
+      transform: translateY(8px) rotate(45deg);
+    }
+    &:after {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+  }
+  & > .list {
+    display: none;
+    flex-flow: row nowrap;
+    align-items: center;
+    white-space: nowrap;
+    @media (min-width: $navbar-collapse-breakpoint) {
+      display: flex;
+      background-color: $main_plain_white;
+    }
+    @media (max-width: $navbar-collapse-breakpoint) {
+      position: absolute;
+      top: 80px;
+      left: 0;
+      width: 100%;
+      border-top: 1px solid $navbar-border-color;
+      background-color: $main_plain_white;
+      z-index: 2;
+    }
+    @media (max-width: 481px) {
+      text-align: center;
+    }
+    &.-on {
+      display: inline-block;
+    }
+  }
+  & > .list > .item {
+    display: block;
+    flex-shrink: 0;
+    height: $navar-list-item-height;
+    line-height: $navbar-height;
+    padding-left: round(($navbar-height - 20) / 2);
+    padding-right: round(($navbar-height - 20) / 2);
+    text-transform: uppercase;
+    color: $navbar-item-color;
+    font-size: $navbar-item-font-size;
+  }
+  & > .list > .item.-link {
+    line-height: $navbar-height + $navbar-item-border-width;
+    color: $navbar-item-color;
+    border-bottom: $navbar-item-border-width solid $main_plain_white;
+    &.-active,
+    &:hover,
+    &:focus {
+      color: $navbar-item-active-color;
+      border-bottom-color: $main_company_color;
+      text-decoration: none;
+    }
+  }
+}
+//slider styles
+.slider-area{
+  .owl-carousel{
+    color: $main_company_color;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+    .owl-item {
+      img {
+        opacity: 0.4;
+        max-height: $owl-item-img-max-height;
+        overflow: hidden;
+        @media (max-width: $navbar-collapse-breakpoint) {
+          max-height: 400px;
+        }
+      }
+    }
+    .owl-dots {
+      width: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      position: absolute;
+      bottom: 15px;
+      @media (max-width: 481px) {
+        bottom: 5px;
+      }
+      .owl-dot{
+        display: inline-block;
+        width: 15px;
+        height: 5px;
+        background: rgba(76, 72, 77, 0.7);
+        vertical-align: middle;
+        text-align: center;
+        margin: 0 0 0 10px;
+        border-radius: 5px;
+        -webkit-box-shadow: 0px 0px 6px 0px rgba(255,255,255,1);
+        -moz-box-shadow: 0px 0px 6px 0px rgba(255,255,255,1);
+        box-shadow: 0px 0px 6px 0px rgba(255,255,255,1);
+      }
+      .active {
+        background-color: $main_company_color;
+      }
+    }
+    .gallery-head-text {
+      @include absoluteText;
+      top: $doc-head-text-margin-bottom;
+      right: $navar-list-item-height;
+      font-size: $main-head-text-font-size;
+      @media (max-width: 769px) {
+        font-size: 32px;
+      }
+      @media (max-width: 621px) {
+        font-size: 24px;
+        top: 45px;
+      }
+      @media (max-width: 481px) {
+        text-align: center;
+        font-size: 20px;
+        top: 4px;
+        right: 0px;
+      }
+    }
+    .gallery-add-text {
+      @include absoluteText;
+      top: 200px;
+      right: $navar-list-item-height;
+      font-size: $slide-add-text-font-size;
+      width: 55%;
+      @media (max-width: 769px) {
+        font-size: 22px;
+        width: 70%;
+      }
+      @media (max-width: 621px) {
+        font-size: 16px;
+        top: 130px;
+        width: 80%;
+      }
+      @media (max-width: 481px) {
+        font-size: 14px;
+        top: 60px;
+        width: 95%;
+        text-align: center;
+        right: 0px;
+      }
+    }
+  }
+}
+//chart styles
+.chart-component-cover {
+  padding: 0 0 20px 0;
+  .ct-series-a{
+    .ct-line {
+      stroke: $main_company_color;
+      stroke-width: 5px;
+    }
+    .ct-point {
+      stroke: $main_company_color;
+    }
+    .ct-bar {
+      stroke: $main_company_color;
+    }
+  }
+  .ct-series-b{
+    .ct-point {
+      stroke: $main_company_color;
+    }
+    .ct-bar {
+      stroke: $navbar-item-active-color;
+    }
+  }
+  .ct-series-c{
+    .ct-line {
+      stroke: $chart-item-red-color;
+      stroke-width: 5px;
+    }
+    .ct-point {
+      stroke: $chart-item-red-color;
+    }
+  }
+}
+.doc-head-text {
+  font-size: $main-head-text-font-size;
+  color: $main_company_color;
+  padding: 15px 0 25px 0;
+  margin-bottom: $doc-head-text-margin-bottom;
+  text-align: center;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.12);
+  @media (max-width: 769px) {
+    font-size: 32px;
+    margin-bottom: 70px;
+  }
+  @media (max-width: 621px) {
+    font-size: 24px;
+    margin-bottom: 45px;
+  }
+}
+//advantages styles
+.adv-cover {
+  .adv-flex-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .adv-flex-container-item {
+      width: 50%;
+      align-self: center;
+      margin: auto;
+      box-shadow: 0 4px 7px rgba(0, 0, 0, 0.12);
+      @include hoverTransition;
+      @media (max-width: 621px) {
+        width: 100%;
+      }
+      &:hover {
+        box-shadow: 0 2px 12px rgba(0, 87, 148, 0.4);
+        @include hoverTransition;
+      }
+      span {
+        display: block;
+        margin: 10% auto 10%;
+        text-align: center;
+        @media (max-width: 621px) {
+          margin-top: 5%;
+        }
+        @media (max-width: 481px) {
+          margin-top: 10%;
+        }
+      }
+      .adv-main-text {
+        font-size: $advantage-main-text-font-size;
+        @media (max-width: 991px) {
+          font-size: 15px;
+        }
+        @media (max-width: 769px) {
+          font-size: 13px;
+        }
+        @media (max-width: 621px) {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+//user action styles
+.user-action {
+  color: $main_company_color;
+  margin: 2% 0 0 0;
+  background-size: cover;
+  background: linear-gradient(
+                  $user-action-bg-gradient-color,
+                  $user-action-bg-gradient-color
+  ), url("../img/action_bg.jpg") no-repeat;
+  .user-flex-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10% 0 10% 0;
+  }
+  .advert-part-cover {
+    background: $advert-part-cover-background-color;
+    padding: 10% 0 10% 0;
+  }
+  .action-head-text {
+    font-size: $main-head-text-font-size;
+    @include actionText;
+    margin: 2% auto;
+    @media (max-width: 769px) {
+      font-size: 32px;
+    }
+    @media (max-width: 621px) {
+      font-size: 24px;
+    }
+    @media (max-width: 481px) {
+      width: 95%;
+    }
+  }
+  .action-add-text {
+    font-size: $advantage-main-text-font-size;
+    @include actionText;
+    @media (max-width: 621px) {
+      font-size: 14px;
+    }
+  }
+  .action-button-section {
+    text-align: center;
+    margin: 5% 0 0% 0;
+  }
+  .registration-btn {
+    width: 100%;
+    height: $navar-list-item-height;
+    max-width: $registration-btn-max-width;
+    border: 2px solid $main_company_color;
+    margin: 10px;
+    background: none;
+    color: $navbar-item-active-color;
+    @include hoverTransition;
+    &:hover {
+      background: $main_company_color;
+      border: none;
+      color: $main_plain_white;
+      @include hoverTransition;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+}
+//partners styles
+.partners {
+  overflow: hidden;
+  .owl-carousel{
+    max-height: $registration-btn-max-width;
+    margin: 0 0 $partners-owl-carousel-margin-bottom 0;
+    @media (max-width: 769px) {
+      margin-bottom: 120px;
+    }
+    @media (max-width: 621px) {
+      margin-bottom: 65px;
+    }
+    .owl-stage-outer {
+      max-height: $registration-btn-max-width;
+    }
+    .owl-item {
+      padding-left: 20px;
+      padding-right: 20px;
+      line-height: $registration-btn-max-width;
+      img {
+        vertical-align: middle;
+        display: inline-block;
+      }
+    }
+  }
+}
+//footer styles
+footer {
+  border-top: 2px solid $main_company_color;
+  @media (max-width: 481px) {
+    text-align: center;
+  }
+  .foot-flex-container {
+    display: flex;
+    align-items: stretch;
+    @media (max-width: 481px) {
+      flex-wrap: wrap;
+    }
+    .foot-flex-item {
+      width: 70%;
+      @media (max-width: 769px) {
+        width: 60%;
+      }
+      @media (max-width: 621px) {
+        width: 50%;
+      }
+      @media (max-width: 481px) {
+        width: 100%;
+      }
+    }
+    .cont-item {
+      width: 30%;
+      @media (max-width: 769px) {
+        width: 40%;
+      }
+      @media (max-width: 621px) {
+        width: 50%;
+      }
+      @media (max-width: 481px) {
+        width: 100%;
+      }
+    }
+  }
+  .foot-menu {
+    display: inline-block;
+    line-height: $foot-menu-line-height;
+    margin: 5%;
+    @media (max-width: 481px) {
+      width: 100%;
+    }
+    .item-foot-link{
+      color: $navbar-item-color;
+      border-bottom: $navbar-item-border-width solid $main_plain_white;
+      &:active,
+      &:hover,
+      &:focus {
+        color: $navbar-item-active-color;
+        border-bottom-color: $main_company_color;
+        text-decoration: none;
+      }
+    }
+  }
+  .contact-section {
+    color: $navbar-item-color;
+    display: inline-block;
+    ul {
+      list-style-type: none;
+      display: inline-block;
+      line-height: $contact-section-ul-line-height;
+      margin: 20% 0 0 0;
+      @media (max-width: 769px) {
+        margin-top: 10%;
+      }
+      @media (max-width: 621px) {
+        margin-top: 5%;
+        font-size: 14px;
+      }
+      @media (max-width: 481px) {
+        padding: 0;
+        margin-bottom: 5%;
+      }
+    }
+    a {
+      display: inline-block;
+      color: $navbar-item-color;
+      &:hover {
+        color: $main_company_color;
+        @include hoverTransition;
+      }
+    }
+  }
+  .sign {
+    text-align: center;
+    color: $navbar-item-color;
+    margin: 0 0 5% 0;
+  }
+}
